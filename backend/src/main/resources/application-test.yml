@@ -1,0 +1,9 @@
+spring:
+  flyway:
+    enabled: true
+  jpa:
+    show-sql: false
+
+logging:
+  level:
+    com.billpilot: INFO
