@@ -8,6 +8,14 @@ A full-stack SaaS billing platform built with Spring Boot and React.
 - **Frontend:** React 19, TypeScript, Vite 6, Tailwind CSS 4, TanStack Query 5
 - **Infrastructure:** Docker Compose, Redis 7
 
+## Screenshots
+
+### Dashboard
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Invoice Detail
+![Invoice Detail](docs/screenshots/invoice.png)
+
 ## Quick Start
 
 ```bash

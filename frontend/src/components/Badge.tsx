@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { cn } from '../utils/cn';
 
 type BadgeVariant = 'success' | 'warning' | 'error' | 'info' | 'neutral';
@@ -28,7 +29,7 @@ const statusVariantMap: Record<string, BadgeVariant> = {
 };
 
 interface BadgeProps {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: BadgeVariant;
   status?: string;
   className?: string;

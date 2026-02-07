@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { useSettings, useUpdateSettings } from '../hooks/useSettings';
 import { LoadingSkeleton } from '../components/LoadingSkeleton';
 
@@ -19,13 +19,15 @@ export function SettingsPage() {
     }
   }, [settings]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await update.mutateAsync({
-      ...form,
+      invoicePrefix: form.invoicePrefix,
+      defaultCurrency: form.defaultCurrency,
       trialDays: parseInt(form.trialDays),
       paymentTermsDays: parseInt(form.paymentTermsDays),
-    } as any);
+      webhookUrl: form.webhookUrl || null,
+    });
   };
 
   if (isLoading) return <LoadingSkeleton rows={6} />;

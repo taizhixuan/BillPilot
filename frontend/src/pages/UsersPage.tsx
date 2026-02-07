@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useUsers, useInviteUser } from '../hooks/useUsers';
 import { DataTable, type Column } from '../components/DataTable';
 import { Pagination } from '../components/Pagination';
@@ -44,7 +44,7 @@ function InviteUserModal({ open, onClose }: { open: boolean; onClose: () => void
   const invite = useInviteUser();
   const [form, setForm] = useState({ email: '', firstName: '', lastName: '', role: 'READ_ONLY' as Role, password: '' });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await invite.mutateAsync(form);
     setForm({ email: '', firstName: '', lastName: '', role: 'READ_ONLY', password: '' });

@@ -34,7 +34,7 @@ public class SubscriptionRenewalJob {
 
         for (Subscription sub : dueForRenewal) {
             try {
-                Plan plan = planRepository.findById(sub.getPlanId()).orElse(null);
+                Plan plan = planRepository.findByIdAndOrgId(sub.getPlanId(), sub.getOrgId()).orElse(null);
                 if (plan == null) continue;
 
                 Instant newStart = sub.getCurrentPeriodEnd();
@@ -60,7 +60,7 @@ public class SubscriptionRenewalJob {
     @Transactional
     public void expireTrials() {
         Instant now = Instant.now();
-        List<Subscription> expiredTrials = subscriptionRepository.findExpiredTrials(now);
+        List<Subscription> expiredTrials = subscriptionRepository.findExpiredTrials(SubscriptionStatus.TRIALING, now);
         log.info("Found {} expired trials", expiredTrials.size());
 
         for (Subscription sub : expiredTrials) {

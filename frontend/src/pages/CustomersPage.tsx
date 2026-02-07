@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCustomers, useCreateCustomer } from '../hooks/useCustomers';
 import { DataTable, type Column } from '../components/DataTable';
@@ -68,7 +68,7 @@ function CustomerFormModal({ open, onClose }: { open: boolean; onClose: () => vo
   const create = useCreateCustomer();
   const [form, setForm] = useState({ name: '', email: '', company: '', phone: '', country: '' });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await create.mutateAsync(form);
     setForm({ name: '', email: '', company: '', phone: '', country: '' });

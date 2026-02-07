@@ -14,7 +14,7 @@ VALUES (
     'c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     'admin@acme.com',
-    '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
+    '$2a$10$m1yE2SfnzpX8PFCI0fEJ8utg5YvtU3p7A6aigAVZtu6GtgZXw86d6',
     'Admin',
     'User',
     'OWNER',

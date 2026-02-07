@@ -55,13 +55,13 @@ public class AuthService {
         orgSettingsRepository.save(settings);
 
         User user = User.builder()
-                .orgId(org.getId())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .role(Role.OWNER)
                 .build();
+        user.setOrgId(org.getId());
         user = userRepository.save(user);
 
         return buildAuthResponse(user);

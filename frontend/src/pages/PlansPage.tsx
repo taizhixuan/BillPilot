@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { usePlans, useCreatePlan, useUpdatePlan, useDeletePlan } from '../hooks/usePlans';
 import { DataTable, type Column } from '../components/DataTable';
 import { Pagination } from '../components/Pagination';
@@ -69,9 +69,11 @@ function PlanFormModal({ open, plan, onClose }: { open: boolean; plan: Plan | nu
     }
   };
 
-  const handleOpen = () => resetForm(plan);
+  useEffect(() => {
+    if (open) resetForm(plan);
+  }, [open, plan]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const data = { ...form, price: parseFloat(form.price), trialDays: parseInt(form.trialDays) };
     if (plan) {
@@ -84,7 +86,6 @@ function PlanFormModal({ open, plan, onClose }: { open: boolean; plan: Plan | nu
 
   return (
     <Modal open={open} onClose={onClose} title={plan ? 'Edit Plan' : 'New Plan'}>
-      <div onTransitionEnd={handleOpen} />
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Name</label>

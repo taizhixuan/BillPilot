@@ -31,7 +31,7 @@ public class DashboardService {
         long activeSubs = subscriptionRepository.countByOrgIdAndStatus(orgId, SubscriptionStatus.ACTIVE);
         long canceledSubs = subscriptionRepository.countByOrgIdAndStatus(orgId, SubscriptionStatus.CANCELED);
         long overdueInvoices = invoiceRepository.countByOrgIdAndStatus(orgId, InvoiceStatus.PAST_DUE);
-        BigDecimal totalPaid = invoiceRepository.sumPaidByOrgId(orgId);
+        BigDecimal totalPaid = invoiceRepository.sumPaidByOrgId(orgId, InvoiceStatus.PAID);
 
         double total = activeSubs + canceledSubs;
         double churnRate = total > 0 ? (canceledSubs / total) * 100 : 0;

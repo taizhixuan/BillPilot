@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,9 +23,9 @@ public interface InvoiceRepository extends JpaRepository<Invoice, UUID> {
     Page<Invoice> findAllByOrgIdAndCustomerId(UUID orgId, UUID customerId, Pageable pageable);
     long countByOrgIdAndStatus(UUID orgId, InvoiceStatus status);
 
-    @Query("SELECT COALESCE(SUM(i.total), 0) FROM Invoice i WHERE i.orgId = :orgId AND i.status = 'PAID'")
-    BigDecimal sumPaidByOrgId(UUID orgId);
+    @Query("SELECT COALESCE(SUM(i.total), 0) FROM Invoice i WHERE i.orgId = :orgId AND i.status = :status")
+    BigDecimal sumPaidByOrgId(@Param("orgId") UUID orgId, @Param("status") InvoiceStatus status);
 
-    @Query("SELECT i FROM Invoice i WHERE i.status = 'OPEN' AND i.dueDate < :today")
-    List<Invoice> findOverdueInvoices(LocalDate today);
+    @Query("SELECT i FROM Invoice i WHERE i.status = :status AND i.dueDate < :today")
+    List<Invoice> findOverdueInvoices(@Param("status") InvoiceStatus status, @Param("today") LocalDate today);
 }

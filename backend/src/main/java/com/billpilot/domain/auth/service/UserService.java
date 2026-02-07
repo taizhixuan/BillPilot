@@ -48,13 +48,13 @@ public class UserService {
         }
 
         User user = User.builder()
-                .orgId(orgId)
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .role(request.getRole())
                 .build();
+        user.setOrgId(orgId);
         user = userRepository.save(user);
         return userMapper.toResponse(user);
     }

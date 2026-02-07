@@ -1,10 +1,11 @@
+import type { ElementType } from 'react';
 import { cn } from '../utils/cn';
 
 interface KpiCardProps {
   title: string;
   value: string | number;
   subtitle?: string;
-  icon: React.ElementType;
+  icon: ElementType;
   trend?: 'up' | 'down' | 'neutral';
   className?: string;
 }

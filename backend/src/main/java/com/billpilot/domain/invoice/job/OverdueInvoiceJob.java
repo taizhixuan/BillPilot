@@ -22,7 +22,7 @@ public class OverdueInvoiceJob {
     @Scheduled(cron = "0 30 2 * * *")
     @Transactional
     public void markOverdueInvoices() {
-        List<Invoice> overdue = invoiceRepository.findOverdueInvoices(LocalDate.now());
+        List<Invoice> overdue = invoiceRepository.findOverdueInvoices(InvoiceStatus.OPEN, LocalDate.now());
         log.info("Found {} overdue invoices", overdue.size());
 
         for (Invoice invoice : overdue) {

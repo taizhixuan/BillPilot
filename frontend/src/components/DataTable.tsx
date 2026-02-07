@@ -1,9 +1,10 @@
+import type { ReactNode } from 'react';
 import { cn } from '../utils/cn';
 
 export interface Column<T> {
   key: string;
   header: string;
-  render: (item: T) => React.ReactNode;
+  render: (item: T) => ReactNode;
   className?: string;
 }
 

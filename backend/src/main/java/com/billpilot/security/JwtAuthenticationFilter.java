@@ -33,9 +33,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UUID userId = tokenProvider.getUserIdFromToken(jwt);
                 UUID orgId = tokenProvider.getOrgIdFromToken(jwt);
                 String role = tokenProvider.getRoleFromToken(jwt);
+                String email = tokenProvider.getEmailFromToken(jwt);
 
                 UserPrincipal principal = new UserPrincipal(
-                        userId, orgId, null, null, Role.valueOf(role), true
+                        userId, orgId, email, null, Role.valueOf(role), true
                 );
 
                 UsernamePasswordAuthenticationToken authentication =

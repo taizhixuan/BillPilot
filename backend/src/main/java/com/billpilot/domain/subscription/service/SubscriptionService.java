@@ -153,16 +153,16 @@ public class SubscriptionService {
 
         sub.setPlanId(newPlan.getId());
         sub.setQuantity(newQuantity);
-        sub = subscriptionRepository.save(sub);
+        Subscription savedSub = subscriptionRepository.save(sub);
 
         if (netAmount.compareTo(BigDecimal.ZERO) > 0) {
-            invoiceService.generateProrationInvoice(sub, newPlan, netAmount, "Plan change proration");
+            invoiceService.generateProrationInvoice(savedSub, newPlan, netAmount, "Plan change proration");
         }
 
-        auditService.logCurrentUser("CHANGE_PLAN", "Subscription", sub.getId(),
+        auditService.logCurrentUser("CHANGE_PLAN", "Subscription", savedSub.getId(),
                 "Changed from " + oldPlan.getName() + " to " + newPlan.getName());
 
-        sub.setPlan(newPlan);
-        return subscriptionMapper.toResponse(sub);
+        savedSub.setPlan(newPlan);
+        return subscriptionMapper.toResponse(savedSub);
     }
 }

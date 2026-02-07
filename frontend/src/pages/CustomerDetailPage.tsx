@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCustomer } from '../hooks/useCustomers';
 import { useCustomerSubscriptions, useCreateSubscription, useCancelSubscription } from '../hooks/useSubscriptions';
@@ -110,7 +110,7 @@ function NewSubscriptionModal({ open, customerId, onClose }: { open: boolean; cu
   const create = useCreateSubscription();
   const [form, setForm] = useState({ planId: '', quantity: '1', startTrial: false });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await create.mutateAsync({ customerId, planId: form.planId, quantity: parseInt(form.quantity), startTrial: form.startTrial });
     onClose();

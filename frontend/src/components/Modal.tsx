@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { cn } from '../utils/cn';
 
@@ -6,7 +6,7 @@ interface ModalProps {
   open: boolean;
   onClose: () => void;
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
